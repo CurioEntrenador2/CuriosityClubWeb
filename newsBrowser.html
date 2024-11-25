@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="left-up-header-wrapper">
+        <div id="left-up-header">
+          <img id="home-button" style="width: 30%; height: auto; transform: translate(200px, 220px); position: relative;" src="public/Images/homesvg.svg">
+          <img id="news-button" style="width: 13%; height: auto; transform: translate(50px, 250px); position: relative;" src="public/Images/newssvg.svg">
+        </div>
+    </div>
+    <div id="background"></div>
+    <div id="main-wrapper" style="flex-wrap: wrap; gap: 1px 7vw;">
+        <div class="news-cards">
+            <h1>Title</h1>
+            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
+            <h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
+            </h5>
+            <div class="bottom-gradient-news">
+            </div>
+        </div>
+        <div class="news-cards">
+            <h1>Title</h1>
+            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
+            <h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
+            </h5>
+            <div class="bottom-gradient-news">
+            </div>
+        </div>
+        <div class="news-cards">
+            <h1>Title</h1>
+            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
+            <h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
+            </h5>
+            <div class="bottom-gradient-news">
+            </div>
+        </div>
+        <div class="news-cards">
+            <h1>Title</h1>
+            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
+            <h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
+            </h5>
+            <div class="bottom-gradient-news">
+            </div>
+        </div>
+        <div class="news-cards">
+            <h1>Title</h1>
+            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
+            <h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
+            </h5>
+            <div class="bottom-gradient-news">
+            </div>
+        </div>
+        <div class="news-cards">
+            <h1>Title</h1>
+            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
+            <h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
+            </h5>
+            <div class="bottom-gradient-news">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Setting up header buttons ------------------------------------------
+
+        document.querySelector("#home-button").addEventListener("click", () => {
+          window.location.href = "index.html"
+        })
+
+        document.querySelector("#news-button").addEventListener("click", () => {
+          window.location.href = "newsBrowser.html"
+        })
+
+        //---------------------------------------------------------------------
+
+        function loadHTMLIntoElement(url, elementId) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error loading ${url}: ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById(elementId).innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Failed to load HTML:', error);
+                });
+        }
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        //document.querySelector("#header").textContent = getQueryParam("title")
+
+        const bg = document.querySelector('#background')
+      
+        window.addEventListener('scroll', () => {
+            const currentScrollPosition = window.pageYOffset + 200;
+            bg.style.transform = "translateY(-"+currentScrollPosition*0.4+"px)"
+        
+        });
+        const currentScrollPosition = window.pageYOffset + 200;
+        bg.style.transform = "translateY(-"+currentScrollPosition*0.4+"px)"
+    </script>
+</body>
+</html>
