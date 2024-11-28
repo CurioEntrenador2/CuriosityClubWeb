@@ -8,69 +8,18 @@
 </head>
 <body>
     <div id="left-up-header-wrapper">
+        <img id="click-img" src="public/Images/pointer-arrow-icon.svg">
+        <img id="C-img" src="public/Images/LetterC.svg">
         <div id="left-up-header">
-          <img id="home-button" style="width: 30%; height: auto; transform: translate(200px, 220px); position: relative;" src="public/Images/homesvg.svg">
-          <img id="news-button" style="width: 13%; height: auto; transform: translate(50px, 250px); position: relative;" src="public/Images/newssvg.svg">
+          <img id="home-button" style="width: 30%; height: auto; transform: translate(200px, 220px); position: relative;" src="./public/Images/homesvg.svg">
+          <img id="news-button" style="width: 13%; height: auto; transform: translate(50px, 250px); position: relative;" src="./public/Images/newssvg.svg">
         </div>
-    </div>
+      </div>
     <div id="background"></div>
     <div id="main-wrapper" style="flex-wrap: wrap; gap: 1px 7vw;">
-        <div class="news-cards">
-            <h1>Title</h1>
-            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
-            <h5>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
-            </h5>
-            <div class="bottom-gradient-news">
-            </div>
-        </div>
-        <div class="news-cards">
-            <h1>Title</h1>
-            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
-            <h5>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
-            </h5>
-            <div class="bottom-gradient-news">
-            </div>
-        </div>
-        <div class="news-cards">
-            <h1>Title</h1>
-            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
-            <h5>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
-            </h5>
-            <div class="bottom-gradient-news">
-            </div>
-        </div>
-        <div class="news-cards">
-            <h1>Title</h1>
-            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
-            <h5>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
-            </h5>
-            <div class="bottom-gradient-news">
-            </div>
-        </div>
-        <div class="news-cards">
-            <h1>Title</h1>
-            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
-            <h5>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
-            </h5>
-            <div class="bottom-gradient-news">
-            </div>
-        </div>
-        <div class="news-cards">
-            <h1>Title</h1>
-            <img src="News/SampleNew/Preview.jpg" style="width: 100%;">
-            <h5>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam aperiam odio debitis exercitationem reiciendis pariatur sed voluptatem ex distinctio odit.
-            </h5>
-            <div class="bottom-gradient-news">
-            </div>
-        </div>
-    </div>
 
+    </div>
+    <script src="NewsList.js"></script>
     <script>
         // Setting up header buttons ------------------------------------------
 
@@ -81,6 +30,35 @@
         document.querySelector("#news-button").addEventListener("click", () => {
           window.location.href = "newsBrowser.html"
         })
+
+        // Loading in news ----------------------------------------------------
+
+        const main = document.querySelector("#main-wrapper")
+        function a() {
+            console.log("mrow")
+        }
+        NewsList.forEach(element => {
+            let script = document.createElement('script')
+            script.src = "News/" + element + "/NewsText.js"
+            document.body.appendChild(script);
+            script.onload = function() {
+                const newsElement = `
+                <div class="news-cards" id=${element}>
+                <h1>${element.replaceAll("_", " ")}</h1>
+                <img src=${"News/"+element+"/Preview.jpg"} style="width: 100%;">
+                <h5>
+                    ${NewsTextBuffer}
+                </h5>
+                <div class="bottom-gradient-news">
+                </div>
+                </div>`
+
+                main.insertAdjacentHTML("beforeend", newsElement)
+                document.querySelector("#"+element).addEventListener("click", () => {
+                    window.location.href = `news.html?title=${element}`
+                })
+            }
+        });
 
         //---------------------------------------------------------------------
 

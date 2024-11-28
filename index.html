@@ -8,10 +8,12 @@
 </head>
 <body>
     <div id="left-up-header-wrapper">
-        <div id="left-up-header">
-          <img id="home-button" style="width: 30%; height: auto; transform: translate(200px, 220px); position: relative;" src="public/Images/homesvg.svg">
-          <img id="news-button" style="width: 13%; height: auto; transform: translate(50px, 250px); position: relative;" src="public/Images/newssvg.svg">
-        </div>
+      <img id="click-img" src="public/Images/pointer-arrow-icon.svg">
+      <img id="C-img" src="public/Images/LetterC.svg">
+      <div id="left-up-header">
+        <img id="home-button" style="width: 30%; height: auto; transform: translate(200px, 220px); position: relative;" src="./public/Images/homesvg.svg">
+        <img id="news-button" style="width: 13%; height: auto; transform: translate(50px, 250px); position: relative;" src="./public/Images/newssvg.svg">
+      </div>
     </div>
     <div id="background"></div>
     <div id="main-wrapper">
@@ -94,9 +96,9 @@
       </div>
       <br><br><br>  
     <!-- Script section -->
+    <script src="NewsList.js"></script>
     <script>
         const bg = document.querySelector('#background')
-      
         window.addEventListener('scroll', () => {
           const currentScrollPosition = window.pageYOffset + 200;
           bg.style.transform = "translateY(-"+currentScrollPosition*0.4+"px)"
@@ -113,24 +115,21 @@
         var newLookingAt = 0
 
         const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo id sit minima distinctio, magni natus dolorem? Incidunt consequuntur nam quaerat, modi, aliquid sunt, reprehenderit cupiditate illo sapiente voluptatum repellendus delectus?"
-        const news = [
-          {
-            "title": "SampleNew",
-            "text": [lorem, lorem]
-          },
-          {
-            "title": "SampleNewCopy",
-            "text": [lorem, lorem]
-          }
-        ];
 
         function navigateToNewsWithParams(title) {
-            window.location.href = `news.html?title=${title}`;
+          window.location.href = `news.html?title=${title}`;
         }
 
-        news.forEach(element => {
+        // --- Getting the news and displaying them --- //
+        window.news = []
+        let first = true
+        NewsList.forEach(element => {
+          let script = document.createElement('script')
+          script.src = "News/" + element + "/NewsText.js"
+          document.body.appendChild(script);
+
           const newsDiv = `<div class="news-prompt" style="margin: 0;">
-                            <div class="image-holder-news" style="margin: 0; transform: rotate(5deg); height: 100vh; width: 100vw; min-width: 50vh; background-image: url(${"News/"+element["title"]+"/Preview.jpg"}); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                            <div class="image-holder-news" style="margin: 0; transform: rotate(5deg); height: 100vh; width: 100vw; min-width: 50vh; background-image: url(${"News/"+element+"/Preview.jpg"}); background-size: cover; background-repeat: no-repeat; background-position: center;">
                             </div>
                           </div>`;
 
@@ -139,8 +138,18 @@
           const lastNewsDiv = newsMover.querySelector(".news-prompt:last-child");
 
           lastNewsDiv.addEventListener("click", () => {
-            navigateToNewsWithParams(element["title"])
+            navigateToNewsWithParams(element)
           });
+          script.onload = function() {
+            news.push({
+            "title": element,
+            "textContent": NewsTextBuffer
+            })
+            if (first) {
+              first = false
+              changeNews()
+            }
+          }
         });
 
         // Setting up header buttons ------------------------------------------
@@ -165,20 +174,18 @@
           
           // Get the selected news item
           const selectedNews = news[newLookingAt];
-          
+          console.log(news)
           // Set the h1 inside #news-title to the title of the selected news item
           const h1 = newsTitle.querySelector('h1');
-          h1.textContent = selectedNews.title;
+          h1.textContent = selectedNews.title.replaceAll("_", " ");
           
           // Remove all existing divs inside #title-text
           titleText.innerHTML = ''; // Clears all content inside #title-text
           
           // Create a new div for each text entry in the selected news item
-          selectedNews.text.forEach(textContent => {
-            const div = document.createElement('div');
-            div.textContent = textContent;
-            titleText.appendChild(div);
-          });
+          const div = document.createElement('div');
+          div.textContent = selectedNews.textContent;
+          titleText.appendChild(div);
         }
       
       
@@ -215,7 +222,7 @@
               button.querySelector("img").style.rotate = ""
               element.querySelector(".theme-text").style.height = ""
             } else {
-              button.querySelector("img").style.rotate = "-90deg"
+              button.querySelector("img").style.rotate = "90deg"
               element.querySelector(".theme-text").style.height = element.querySelector(".theme-text").scrollHeight + "px"
             }
             open = !open

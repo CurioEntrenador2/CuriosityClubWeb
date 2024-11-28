@@ -28,22 +28,46 @@
     transition: width 1s cubic-bezier(0.19, 1, 0.22, 1), height 1s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
-  #left-up-header img {
-    transition: scale 1s cubic-bezier(0.19, 1, 0.22, 1);
-  }
+#left-up-header img {
+  transition: scale 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
 
-  #left-up-header img:hover {
-    scale: 1.05;
-  }
+#left-up-header img:hover {
+  scale: 1.05;
+}
+
+#click-img {
+  position: absolute; 
+  height: 50px; 
+  width: auto; 
+  transform: translate(150px, 150px);
+  transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#C-img{
+  position: absolute; 
+  height: 50px; 
+  width: auto; 
+  transform: translate(50px, 150px);
+  transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#left-up-header-wrapper:hover #click-img {
+  transform: translate(150px, 50px);
+}
+
+#left-up-header-wrapper:hover #C-img {
+  transform: translate(150px, 150px);
+}
   
-  #left-up-header-wrapper {
-    z-index: 1;
-    position: fixed;
-    transform: translate(-130px, -130px);
-    border-radius: 50%;
-    width: 300px;
-    height: 300px;
-  }
+#left-up-header-wrapper {
+  z-index: 1;
+  position: fixed;
+  transform: translate(-130px, -130px);
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
   
   #left-up-header-wrapper:hover #left-up-header {
     width: 330px;
@@ -170,6 +194,7 @@
   .dropdown-button {
     border: none;
     background: none;
+    rotate: -180deg;
   }
   
   .dropdown-button img {
@@ -177,7 +202,7 @@
   }
   
   .dropdown-button:hover img {
-    rotate: -10deg;
+    rotate: 10deg;
   }
   
   .theme-text {
