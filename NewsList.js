@@ -1,8 +1,7 @@
 // data.js
 const NewsList = [
-    "SampleNew",
-    "SampleNew_Copy",
-    "Curiosity_Gana"
+    "Gracias,_System73",
+    "Calentando_motores",
 ]
   
 // Make jsonData globally accessible
