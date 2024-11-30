@@ -1,0 +1,1 @@
+window.NewsTextBuffer = `La charla de Daniel en nuestra primera asamblea fue inspiradora. Su experiencia vital, su visión y su capacidad de ponerse en la piel de estudiantes con nuestra curiosidad y nuestras ganas de aprender coincidieron en dos charlas de 25 minutos electrizantes para el público asistente. Gracias, Daniel. Esperamos verte de nuevo en el Club.`
