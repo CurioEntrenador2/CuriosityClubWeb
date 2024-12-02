@@ -43,7 +43,7 @@
             document.body.appendChild(script);
             script.onload = function() {
                 const newsElement = `
-                <div class="news-cards" id=${element}>
+                <div class="news-cards" id=${element.replaceAll(",", "")}>
                 <h1>${element.replaceAll("_", " ")}</h1>
                 <img src=${"News/"+element+"/Preview.jpg"} style="width: 100%;">
                 <h5>
@@ -54,7 +54,7 @@
                 </div>`
 
                 main.insertAdjacentHTML("beforeend", newsElement)
-                document.querySelector("#"+element).addEventListener("click", () => {
+                document.querySelector(`#${element.replaceAll(",", "")}`).addEventListener("click", () => {
                     window.location.href = `news.html?title=${element}`
                 })
             }
